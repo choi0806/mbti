@@ -191,6 +191,11 @@ export default function App() {
     // 점수 반영
     setScores(prev => ({ ...prev, [option.type]: prev[option.type] + 1 }));
     
+    // 즉시 스크롤
+    setTimeout(() => {
+      chatEndRef.current?.scrollIntoView({ behavior: "auto" });
+    }, 0);
+    
     if (currentQIndex < QUESTIONS.length - 1) {
       setCurrentQIndex(prev => prev + 1);
       addBotMessage(QUESTIONS[currentQIndex + 1].chat);
@@ -208,11 +213,17 @@ export default function App() {
     setTimeout(() => {
       setChatHistory(prev => [...prev, { sender: 'bot', text }]);
       setIsTyping(false);
+      // 봇 메시지 후 스크롤
+      setTimeout(() => {
+        chatEndRef.current?.scrollIntoView({ behavior: "auto" });
+      }, 0);
     }, 800);
   };
 
   useEffect(() => {
-    if (step === 'chat') chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (step === 'chat' && chatHistory.length > 0) {
+      chatEndRef.current?.scrollIntoView({ behavior: "auto" });
+    }
   }, [chatHistory, isTyping, step]);
 
 
