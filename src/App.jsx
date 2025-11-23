@@ -32,17 +32,55 @@ const STYLES = {
   progressBarFill: "h-full bg-[#007BFF] border-r-2 border-black transition-all duration-300"
 };
 
-// --- 데이터: MBTI 문항 (코드 길이상 8문항으로 축약, 실제론 20개 다 넣으시면 됩니다) ---
+// --- 데이터: MBTI 문항 (20개) ---
 const QUESTIONS = [
+  // E/I 문항 (5개)
   { type: 'EI', text: "주말에 갑작스러운 번개 모임 제안이 왔다.", chat: "야ㅋㅋ 지금 강남인데 나와! 애들 다 모임", 
     optA: { text: "오! 재밌겠다 바로 나감", type: 'E' }, optB: { text: "아.. 나 오늘 쉴래 (기빨림)", type: 'I' } },
+  { type: 'EI', text: "파티에 갔을 때 나의 모습은?", chat: "오늘 파티 어땠어?", 
+    optA: { text: "여기저기 돌아다니며 사람들이랑 떠듦", type: 'E' }, optB: { text: "아는 사람들이랑만 조용히 얘기함", type: 'I' } },
+  { type: 'EI', text: "스트레스 받을 때 푸는 방법은?", chat: "요즘 스트레스 쌓이는데 어떻게 풀어?", 
+    optA: { text: "친구 만나서 수다 떨면서 푼다", type: 'E' }, optB: { text: "혼자 있으면서 생각 정리한다", type: 'I' } },
+  { type: 'EI', text: "새로운 사람들과 만날 때", chat: "내일 MT 간다며? 새로운 사람들 많이 만나겠네", 
+    optA: { text: "신나! 새로운 사람 만나는 거 좋아", type: 'E' }, optB: { text: "어색할 것 같은데... 긴장됨", type: 'I' } },
+  { type: 'EI', text: "통화와 문자 중에 선호하는 것은?", chat: "야 나 말 좀 해야 되는데", 
+    optA: { text: "바로 전화해! 통화가 편해", type: 'E' }, optB: { text: "카톡으로 보내줘 문자가 좋아", type: 'I' } },
+  
+  // S/N 문항 (5개)
   { type: 'SN', text: "멍 때릴 때 주로 하는 생각은?", chat: "너 무슨 생각 해? 멍 때리네", 
     optA: { text: "오늘 저녁 뭐 먹지? (현실적)", type: 'S' }, optB: { text: "좀비 사태 터지면 어디로 튀지? (망상)", type: 'N' } },
+  { type: 'SN', text: "친구에게 어제 일을 설명할 때", chat: "어제 뭐 했어?", 
+    optA: { text: "카페 가서 커피 마시고 쇼핑했어", type: 'S' }, optB: { text: "그냥... 힐링? 여유로운 시간? 느낌 있었어", type: 'N' } },
+  { type: 'SN', text: "요리 레시피를 볼 때", chat: "이거 어떻게 만들어?", 
+    optA: { text: "레시피 보고 정확히 따라 만듦", type: 'S' }, optB: { text: "대충 감으로 응용해서 만듦", type: 'N' } },
+  { type: 'SN', text: "책을 읽을 때 나는?", chat: "요즘 무슨 책 읽어?", 
+    optA: { text: "실용적인 자기계발서나 정보 책", type: 'S' }, optB: { text: "판타지 소설이나 철학책", type: 'N' } },
+  { type: 'SN', text: "과거를 회상할 때", chat: "작년 이맘때 뭐 했더라?", 
+    optA: { text: "구체적인 사건들이 기억남", type: 'S' }, optB: { text: "그때의 느낌이나 분위기가 기억남", type: 'N' } },
+  
+  // T/F 문항 (5개)
   { type: 'TF', text: "친구가 차 사고가 났다고 전화가 왔다.", chat: "나 방금 차 박음...ㅠㅠ 어떡해", 
     optA: { text: "보험 불렀어? 사진 찍었어?", type: 'T' }, optB: { text: "헐 괜찮아?? 많이 놀랐겠다 ㅠㅠ", type: 'F' } },
+  { type: 'TF', text: "친구가 이상한 옷을 입고 나타났다.", chat: "이거 어때? 새로 산 건데", 
+    optA: { text: "솔직히 말해줌 (안 어울려)", type: 'T' }, optB: { text: "괜찮은데? 하고 넘어감 (배려)", type: 'F' } },
+  { type: 'TF', text: "영화를 보고 난 뒤 중요한 것은?", chat: "영화 어땠어?", 
+    optA: { text: "스토리 구성, 연출, 개연성", type: 'T' }, optB: { text: "감동, 여운, 캐릭터 감정", type: 'F' } },
+  { type: 'TF', text: "친구가 시험 망쳤다고 한다.", chat: "아 시험 망했어 ㅠㅠ", 
+    optA: { text: "어디가 어려웠어? 다음엔 이렇게 해봐", type: 'T' }, optB: { text: "ㅠㅠ 속상하겠다 괜찮아 힘내", type: 'F' } },
+  { type: 'TF', text: "회의 중 의견 충돌이 생겼을 때", chat: "회의 분위기 안 좋던데", 
+    optA: { text: "논리적으로 설득하고 결론 내림", type: 'T' }, optB: { text: "분위기 먼저 풀고 조율함", type: 'F' } },
+  
+  // J/P 문항 (5개)
   { type: 'JP', text: "여행 계획을 짤 때 나는?", chat: "우리 다음 달 제주도 가는 거 계획 짜자.", 
     optA: { text: "엑셀 켜. 시간 단위로 동선 짠다.", type: 'J' }, optB: { text: "비행기만 끊어. 가서 정하자.", type: 'P' } },
-    // ... (필요시 더 추가)
+  { type: 'JP', text: "과제 마감이 다가올 때", chat: "과제 언제까지야?", 
+    optA: { text: "미리미리 계획 세워서 끝냄", type: 'J' }, optB: { text: "마감 직전에 몰아서 함", type: 'P' } },
+  { type: 'JP', text: "방 정리를 할 때", chat: "방 좀 치워라", 
+    optA: { text: "정해진 위치에 규칙적으로 정리", type: 'J' }, optB: { text: "보이는 곳만 치우거나 급할 때만", type: 'P' } },
+  { type: 'JP', text: "주말 계획은?", chat: "이번 주말에 뭐 해?", 
+    optA: { text: "이미 다 정해져 있음", type: 'J' }, optB: { text: "그때그때 기분 따라 정함", type: 'P' } },
+  { type: 'JP', text: "일을 진행할 때", chat: "이 일 어떻게 진행할 거야?", 
+    optA: { text: "단계별로 체크리스트 만들어서", type: 'J' }, optB: { text: "유연하게 상황 보면서", type: 'P' } }
 ];
 
 export default function App() {
