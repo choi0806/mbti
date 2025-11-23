@@ -3,6 +3,7 @@ import { MessageSquare, CheckSquare, ArrowRight, RotateCcw, Send, Terminal, BarC
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInAnonymously, onAuthStateChanged } from 'firebase/auth';
 import { getFirestore, collection, addDoc, query, onSnapshot, serverTimestamp } from 'firebase/firestore';
+import './index.css'
 
 // --- 1단계에서 복사한 내 설정을 여기에 붙여넣으세요 ---
 const firebaseConfig = {
