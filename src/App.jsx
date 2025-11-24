@@ -562,19 +562,19 @@ export default function App() {
     const q = QUESTIONS[currentQIndex];
     return (
       <div className="min-h-screen bg-[#FFD700] p-4 font-mono flex items-center justify-center">
-        <div className="w-full max-w-md bg-white border-4 border-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] h-[800px] flex flex-col relative overflow-hidden">
-          <div className="bg-white border-b-4 border-black p-4 flex justify-between items-center z-10">
+        <div className="w-full max-w-md bg-white border-4 border-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] h-[800px] flex flex-col">
+          <div className="bg-white border-b-4 border-black p-4 flex justify-between items-center flex-shrink-0">
             <div className="font-black">PHASE 2. TYPE B (채팅)</div>
             <div className="text-xs font-bold bg-black text-white px-2 py-1">{currentQIndex + 1}/{QUESTIONS.length}</div>
           </div>
-          <div className="flex-1 overflow-y-auto p-4 flex flex-col bg-[#f4f4f0] scrollbar-hide pb-32">
+          <div className="flex-1 overflow-y-auto p-4 flex flex-col bg-[#f4f4f0] scrollbar-hide">
             {chatHistory.map((msg, idx) => (
               <div key={idx} className={msg.sender === 'bot' ? STYLES.chatBubbleBot : STYLES.chatBubbleUser}>{msg.text}</div>
             ))}
             {isTyping && <div className={`${STYLES.chatBubbleBot} w-16 flex justify-center items-center gap-1`}><div className="w-2 h-2 bg-black animate-bounce"></div><div className="w-2 h-2 bg-black animate-bounce delay-75"></div><div className="w-2 h-2 bg-black animate-bounce delay-150"></div></div>}
             <div ref={chatEndRef} />
           </div>
-          <div className="absolute bottom-0 w-full bg-white border-t-4 border-black p-4 z-20">
+          <div className="bg-white border-t-4 border-black p-4 flex-shrink-0">
             {!isTyping && (
               <div className="flex flex-col gap-2">
                 <button onClick={() => handleChatReply(q.chat.optA)} className="bg-white border-2 border-black p-3 text-left font-bold hover:bg-[#007BFF] hover:text-white transition active:bg-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[2px] active:translate-y-[2px]">{q.chat.optA.text}</button>
